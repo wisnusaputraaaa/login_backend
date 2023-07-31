@@ -1,0 +1,127 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Login</title>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-center">
+        <h4>Ini Contoh yakk :)</h4>
+        <div>
+          <a href="register.html"></a>
+        </div>
+      </div>
+    </nav>
+    <main>
+      <form action="/register" method="POST">
+        <h3>Register</h3>
+        <div class="form-row">
+          <label for="name"> enter name </label>
+          <input type="text" name="name" id="name" autocomplete="false" />
+          <label for="email"> enter email </label>
+          <input type="email" name="email" id="email" autocomplete="false" />
+          <label for="password"> create password </label>
+          <input type="password" name="password" id="password" autocomplete="false" />
+          <label for="confPassword"> confirm password </label>
+          <input type="password" name="confPassword" id="confPassword" autocomplete="false" />
+        </div>
+        <button type="submit" class="block">sign up</button>
+      </form>
+    </main>
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Register</title>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-center">
+        <h4>Ini Contoh yakk :)</h4>
+        <div>
+          <a href="register.html"></a>
+        </div>
+      </div>
+    </nav>
+    <main>
+      <form id="registerForm" action="/register" method="POST">
+        <h3>Register</h3>
+        <div class="form-row">
+          <label for="name">Enter name</label>
+          <input type="text" name="name" id="name" required autocomplete="off" />
+          <label for="email">Enter email</label>
+          <input type="email" name="email" id="email" required autocomplete="off" />
+          <label for="password">Create password</label>
+          <input type="password" name="password" id="password" required autocomplete="off" />
+          <label for="confPassword">Confirm password</label>
+          <input type="password" name="confPassword" id="confPassword" required autocomplete="off" />
+        </div>
+        <button type="submit" class="block">Sign Up</button>
+      </form>
+    </main>
+
+    <script>
+      const registerForm = document.getElementById('registerForm');
+
+      registerForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const confPasswordInput = document.getElementById('confPassword');
+
+        const formData = {
+          name: nameInput.value,
+          email: emailInput.value,
+          password: passwordInput.value,
+          confPassword: confPasswordInput.value
+        };
+
+        if (formData.password !== formData.confPassword) {
+          // Jika password dan konfirmasi password tidak cocok, tampilkan pesan error
+          const errorElement = document.createElement('p');
+          errorElement.textContent = 'Password dan konfirmasi password harus sama';
+          registerForm.appendChild(errorElement);
+          return;
+        }
+
+        fetch('/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              // Jika registrasi berhasil, lakukan sesuatu, seperti redirect ke halaman login
+              console.log(data.msg);
+              window.location.href = '/index.html';
+            } else {
+              // Jika registrasi gagal, tampilkan pesan error
+              console.log(data.msg);
+              // Misalnya, tampilkan pesan error di bawah tombol sign up
+              const errorElement = document.createElement('p');
+              errorElement.textContent = data.msg;
+              registerForm.appendChild(errorElement);
+            }
+          })
+          .catch((error) => {
+            console.log('Error:', error);
+          });
+      });
+    </script>
+  </body>
+</html>

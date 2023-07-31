@@ -1,0 +1,107 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Login</title>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-center">
+        <h4>Ini Contoh yakk :)</h4>
+        <div>
+          <a href="index.html"></a>
+        </div>
+      </div>
+    </nav>
+    <main>
+      <form action="/login" method="POST">
+        <h3>Login</h3>
+        <div class="form-row">
+          <label for="email"> enter email </label>
+          <input type="text" name="email" id="email" autocomplete="false" />
+          <label for="password"> enter password </label>
+          <input type="password" name="password" id="password" autocomplete="false" />
+        </div>
+        <button type="submit" class="block">login</button>
+      </form>
+    </main>
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Login</title>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-center">
+        <h4>Ini Contoh yakk :)</h4>
+        <div>
+          <a href="index.html"></a>
+        </div>
+      </div>
+    </nav>
+    <main>
+      <form id="loginForm" action="/login" method="POST">
+        <h3>Login</h3>
+        <div class="form-row">
+          <label for="email">Enter email</label>
+          <input type="email" name="email" id="email" required autocomplete="off" />
+          <label for="password">Enter password</label>
+          <input type="password" name="password" id="password" required autocomplete="off" />
+        </div>
+        <button type="submit" class="block">Login</button>
+      </form>
+    </main>
+
+    <script>
+      const loginForm = document.getElementById('loginForm');
+
+      loginForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+
+        const formData = {
+          email: emailInput.value,
+          password: passwordInput.value
+        };
+
+        fetch('/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              // Jika login berhasil, lakukan sesuatu, seperti redirect ke halaman lain
+              console.log(data.msg);
+              window.location.href = '/dashboard.html';
+            } else {
+              // Jika login gagal, tampilkan pesan error
+              console.log(data.msg);
+              // Misalnya, tampilkan pesan error di bawah tombol login
+              const errorElement = document.createElement('p');
+              errorElement.textContent = data.msg;
+              loginForm.appendChild(errorElement);
+            }
+          })
+          .catch((error) => {
+            console.log('Error:', error);
+          });
+      });
+    </script>
+  </body>
+</html>
