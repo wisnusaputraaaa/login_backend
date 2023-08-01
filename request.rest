@@ -1,15 +1,15 @@
 GET http://localhost:3000/users
-Authorization: Barear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjg4LCJuYW1lIjoiQWRhbSIsImVtYWlsIjoiYWRhbUBnbWFpbC5jb20iLCJpYXQiOjE2OTA3MTI5MDUsImV4cCI6MTY5MDcxMjkyMH0.wdRvR4V0crVtbd3UhwKoje1X1_YZUq6SiHOruLoy4wo
+Authorization: Barear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjkwLCJuYW1lIjoiQXVyb3JhIiwiZW1haWwiOiJhdXJvcmFAZ21haWwuY29tIiwiaWF0IjoxNjkwODgwMDI0LCJleHAiOjE2OTA4ODAwMzl9.myr-xqSuR18yMX0fVsEfyRPBcB-PElQG9W2MAjhvkBM
 
 #########
-POST http://localhost:3000/users
+POST http://localhost:3000/register
 Content-Type: application/json
 
 {
-    "name": "wisnu",
-    "email": "wisnu@gmail.om",
-    "password": "1234",
-    "confPassword": "1234"
+    "name": "Rangga",
+    "email": "rangga@gmail.com",
+    "password": "rangga123",
+    "confPassword": "rangga123"
 }
 
 #########
@@ -17,8 +17,8 @@ POST http://localhost:3000/login
 Content-Type: application/json
 
 {
-    "email": "adam@gmail.com",
-    "password": "adam123"
+    "email": "aurora@gmail.com",
+    "password": "aurora123"
 }
 
 #########
