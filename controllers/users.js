@@ -45,7 +45,7 @@ exports.userRegistrasiHandler = async (req, res) => {
     }
 
     if (!validator.isEmail(email)) {
-      return res.status(400).json({ success: false, msg: 'Email tidak ngontol' });
+      return res.status(400).json({ success: false, msg: 'Email tidak valid' });
     }
     
    
@@ -60,10 +60,10 @@ exports.userRegistrasiHandler = async (req, res) => {
     connection.query(query, [name, email, hashPassword], (error, results) => {
       if (error) {
         console.log(error);
-        return res.status(500).json({success: false, msg: 'Gagal melakukan ewe'});
+        return res.status(500).json({success: false, msg: 'Gagal melakukan registrasi'});
       }else{
           //Berhasil melakukan registrasi
-        return res.status(200).json({success: true, msg: 'ewe berhasil'});
+        return res.status(200).json({success: true, msg: 'Registrasi user berhasil'});
       }
     });
   } catch (error) {
