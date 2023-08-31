@@ -16,7 +16,6 @@ exports.refreshToken = (req, res) => {
               }
 
             const user = results[0];
-            console.log(user)
             const storedRefreshToken = user.refresh_token;
             if (storedRefreshToken === refreshToken) {
                 jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (error, decoded) => {
